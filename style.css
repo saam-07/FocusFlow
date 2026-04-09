@@ -1,0 +1,72 @@
+:root {
+    --primary-lavender: #b19cd9;
+    --dark-bg: #121212;
+    --card-bg: #1e1e1e;
+    --text-main: #e0e0e0;
+}
+
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--text-main);
+    margin: 0;
+    font-size: 1.1rem; /* Global font size increase */
+}
+
+/* BIG NAVBAR */
+nav {
+    background: var(--card-bg);
+    padding: 1.5rem; /* Larger padding */
+    display: flex;
+    justify-content: center;
+    gap: 40px; /* Wider spacing */
+    border-bottom: 3px solid var(--primary-lavender);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+nav a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.3rem; /* Larger links */
+    transition: 0.3s;
+}
+
+nav a:hover { color: var(--primary-lavender); transform: translateY(-2px); }
+
+.container {
+    max-width: 1000px; /* Wider container */
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.card {
+    background: var(--card-bg);
+    padding: 50px; /* Huge breathing room */
+    border-radius: 24px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.6);
+    margin-bottom: 40px;
+}
+
+h1 { font-size: 3.5rem; margin-bottom: 20px; }
+h2 { font-size: 2.2rem; }
+
+input, select, button {
+    width: 100%;
+    padding: 18px; /* Chunkier inputs */
+    margin: 15px 0;
+    border-radius: 12px;
+    font-size: 1.2rem; /* Easy to read */
+    border: 2px solid #333;
+}
+
+button {
+    background: var(--primary-lavender);
+    color: #121212;
+    font-weight: 800;
+    cursor: pointer;
+    border: none;
+    transition: 0.2s;
+}
+
+button:hover { filter: brightness(1.1); transform: scale(1.02); }
