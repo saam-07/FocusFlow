@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FocusFlow | Focus Session</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .timer-container{
+            max-width:700px;
+            margin:50px auto;
+            text-align:center;
+        }
+
+        .timer-display{
+            font-size:5rem;
+            font-weight:bold;
+            color:var(--accent);
+            margin:20px 0;
+        }
+
+        .timer-buttons{
+            display:flex;
+            gap:10px;
+            justify-content:center;
+            flex-wrap:wrap;
+        }
+
+        .timer-buttons button{
+            width:auto;
+            min-width:120px;
+        }
+
+        .current-task{
+            font-size:1.2rem;
+            margin-top:10px;
+            color:var(--muted);
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="timer-container">
+
+    <div class="card">
+
+        <h1>🔥 Focus Session</h1>
+
+        <div id="currentTaskName"
+             class="current-task">
+        </div>
+
+        <div id="timer"
+             class="timer-display">
+            25:00
+        </div>
+
+        <div class="timer-buttons">
+
+            <button onclick="startTimer()">
+                Start
+            </button>
+
+            <button onclick="pauseTimer()">
+                Pause
+            </button>
+
+            <button onclick="resetTimer()">
+                Reset
+            </button>
+
+        </div>
+
+        <button
+            style="margin-top:20px"
+            onclick="window.location.href='index.html'">
+
+            ← Back To Dashboard
+
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+const task =
+localStorage.getItem("currentTask");
+
+document.getElementById(
+"currentTaskName"
+).innerText =
+task
+? `Working on: ${task}`
+: "No task selected";
+
+let timeLeft = 25 * 60;
+let timerInterval;
+
+function updateDisplay(){
+
+    const mins =
+    Math.floor(timeLeft / 60);
+
+    const secs =
+    timeLeft % 60;
+
+    document.getElementById(
+    "timer"
+    ).textContent =
+    `${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
+}
+
+function startTimer(){
+
+    if(timerInterval) return;
+
+    timerInterval =
+    setInterval(()=>{
+
+        if(timeLeft > 0){
+
+            timeLeft--;
+
+            updateDisplay();
+
+        } else {
+
+            clearInterval(timerInterval);
+
+            timerInterval = null;
+
+            alert(
+            `🎉 Great work!\n\nYou completed a focus session for:\n${task || "your task"}`
+            );
+        }
+
+    },1000);
+}
+
+function pauseTimer(){
+
+    clearInterval(timerInterval);
+
+    timerInterval = null;
+}
+
+function resetTimer(){
+
+    pauseTimer();
+
+    timeLeft = 25 * 60;
+
+    updateDisplay();
+}
+
+updateDisplay();
+
+</script>
+
+</body>
+</html>

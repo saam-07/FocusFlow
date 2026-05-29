@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FocusFlow</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>FocusFlow 🚀</h1>
+        <p>Don't decide what to do. FocusFlow decides for you.</p>
+    </header>
+
+    <main class="dashboard">
+
+        <!-- LEFT COLUMN -->
+        <section class="left-column">
+
+            <!-- Today's Context -->
+            <div class="card">
+                <h2>Today's Context</h2>
+
+                <label>Energy Level</label>
+                <select id="energyLevel">
+                    <option value="1">😵 Low Energy</option>
+                    <option value="2" selected>😐 Medium Energy</option>
+                    <option value="3">🔥 High Energy</option>
+                </select>
+
+                <label>Class Hours Today</label>
+                <input
+                    type="number"
+                    id="classHours"
+                    min="0"
+                    max="24"
+                    value="6"
+                >
+
+                <label>Sleep Hours</label>
+                <input
+                    type="number"
+                    id="sleepHours"
+                    min="0"
+                    max="24"
+                    value="8"
+                >
+
+                <button onclick="calculateFreeTime()">
+                    Calculate Free Time
+                </button>
+
+                <div id="freeTimeDisplay">
+                    Free Time: --
+                </div>
+            </div>
+
+            <!-- Add Task -->
+            <div class="card">
+                <h2>Add Task</h2>
+
+                <input
+                    type="text"
+                    id="taskTitle"
+                    placeholder="Task Name"
+                >
+
+                <label>Importance</label>
+                <select id="taskImportance">
+                    <option value="1">🟢 Low</option>
+                    <option value="2">🟡 Medium</option>
+                    <option value="3">🔴 High</option>
+                </select>
+
+                <label>Hours Needed</label>
+                <input
+                    type="number"
+                    id="taskHours"
+                    min="0.5"
+                    step="0.5"
+                    placeholder="Example: 2"
+                >
+
+                <label>Deadline</label>
+                <input
+                    type="date"
+                    id="taskDeadline"
+                >
+
+                <button onclick="addTask()">
+                    Add Task
+                </button>
+            </div>
+
+        </section>
+
+        <!-- RIGHT COLUMN -->
+        <section class="right-column">
+
+            <!-- Task List -->
+            <div class="card">
+                <h2>Your Tasks</h2>
+
+                <div id="taskList">
+                    <p class="empty-state">
+                        No tasks added yet.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Recommendation -->
+            <div class="card recommendation-card">
+
+                <h2>Smart Recommendation</h2>
+
+                <button onclick="generateRecommendation()">
+                    What Should I Do Now?
+                </button>
+
+                <div id="recommendationResult">
+
+                    <h3>No recommendation yet</h3>
+
+                    <p>
+                        Add tasks and calculate your free time.
+                    </p>
+                    <div id="recommendationResult">
+                <h3>No recommendation yet</h3>
+                    </div>
+
+                <button onclick="startFocusSession()">
+                    Start Focus Session
+                </button>
+
+                </div>
+
+            </div>
+
+            <!-- Overwhelm Warning -->
+            <div class="card warning-card">
+
+                <h2>Workload Check</h2>
+
+                <div id="overwhelmWarning">
+                    No analysis yet.
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
