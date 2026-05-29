@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FocusFlow | Planner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onload="runPlanner()">
+    <nav>
+        <a href="index.html">Mood</a>
+        <a href="tasks.html">Tasks</a>
+        <a href="planner.html">Planner</a>
+        <a href="pomodoro.html">Focus</a>
+    </nav>
+    <div class="container">
+        <div id="suggestionBox" class="card">
+            <!-- Suggestion Engine Injects here -->
+        </div>
+        
+        <div class="card">
+            <h3>Schedule Preview</h3>
+            <div id="miniCalendar" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center;">
+                <!-- We can auto-generate dates here -->
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        function runPlanner() {
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    const energy = parseInt(localStorage.getItem('userEnergy')) || 2;
+    const free = parseFloat(localStorage.getItem('freeTime')) || 0;
+    const box = document.getElementById('suggestionBox');
+
+    // SMART FILTER: Matches energy AND fits in available time
+    const match = tasks.find(t => t.effort <= energy && t.hours <= free);
+
+    if (match) {
+        box.innerHTML = `
+            <h1 style="color:var(--primary-lavender)">Your Smart Pick</h1>
+            <p style="font-size:1.5rem">You have <b>${free} hours</b> available (Sleep & Class blocked).</p>
+            <div class="card" style="border: 2px solid var(--primary-lavender); background: #252525;">
+                <h2>${match.title}</h2>
+                <p>⏱️ Estimated time: ${match.hours} hours</p>
+                <p>⚡ Energy required: ${match.effort}/3</p>
+                <button onclick="location.href='pomodoro.html'">Start Focus Session</button>
+            </div>
+        `;
+    } else {
+        box.innerHTML = `
+            <h1>No matches found!</h1>
+            <p>Either tasks are too "heavy" for your energy, or they take longer than the ${free} hours you have free.</p>
+            <button onclick="location.href='tasks.html'">Adjust Task Hours</button>
+        `;
+    }
+    generateCalendar();
+}
+        
+    </script>
+</body>
+</html>

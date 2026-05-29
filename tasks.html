@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FocusFlow | Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onload="displayTasks()">
+
+    <nav>
+        <a href="index.html">Mood</a>
+        <a href="tasks.html" style="color: var(--primary-lavender);">Tasks</a>
+        <a href="planner.html">Planner</a>
+        <a href="pomodoro.html">Focus</a>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+            <h2 style="margin-top:0;">Add New Task</h2>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                
+                <input type="text" id="taskTitle" placeholder="Task Name (e.g. Finish Math Homework)">
+                
+                <div style="display: flex; gap: 15px;">
+                    <div style="flex: 1;">
+                        <label>Hours Needed:</label>
+                        <input type="number" id="taskHours" placeholder="e.g. 2" min="0.5" step="0.5">
+                    </div>
+                    <div style="flex: 1;">
+                        <label>Energy Required:</label>
+                        <select id="taskEffort">
+                            <option value="1">Low Effort</option>
+                            <option value="2">Medium Effort</option>
+                            <option value="3">High Effort</option>
+                        </select>
+                    </div>
+                </div>
+
+                <label>Deadline:</label>
+                <input type="date" id="taskDeadline">
+                
+                <button onclick="saveTask()">Add to My List</button>
+            </div>
+        </div>
+
+        <h2 style="text-align: left; margin-left: 10px;">Your Current Backlog</h2>
+        <div id="taskList">
+            </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
